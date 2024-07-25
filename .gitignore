@@ -1,0 +1,17 @@
+*.py[cod]
+__pycache__/
+*.so
+
+# 환경 설정 파일
+.env
+nohup.out
+.DS_Store
+
+# Virtual environment
+venv/
+ENV/
+env/
+
+# IDE 관련 파일
+.vscode/
+.idea/
