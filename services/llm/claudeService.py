@@ -50,3 +50,17 @@ class claudeService:
 
         return message.content[0].text
 
+def getScoreAndFeedbackFromEvaluate(claudeKey,evalPrompt,parseManager,tale,isGame):
+
+    if isGame:
+        claudeManger = claudeService(claudeKey)
+        evalResult = claudeManger.evaluateGame(evalPrompt, tale)
+        score, feedback = parseManager.getGameScoreAndFeedBack(evalResult)
+
+    else:
+        claudeManger = claudeService(claudeKey)
+        evalResult = claudeManger.evaluateGame(evalPrompt, tale)
+        score, feedback = parseManager.getScoreAndFeedBack(evalResult)
+
+    return score,feedback
+

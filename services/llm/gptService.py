@@ -104,8 +104,9 @@ class GPTService:
             temperature=0,
             top_p=0.1
         )
-
-        return completion.choices[0].message.content
+        a = completion.choices[0].message.content
+        print(a)
+        return a
 
     def endGameTale(self,fairyTale):
         client = OpenAI(api_key=self.api_key)
@@ -135,8 +136,9 @@ class GPTService:
 
             top_p=0
         )
-
-        return dict(completion.choices[0].message)['content']
+        a = dict(completion.choices[0].message)['content']
+        print(a)
+        return a
 
 
     def createGameFromFeedback(self,prompt,tale,feedback):

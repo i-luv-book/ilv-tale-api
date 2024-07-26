@@ -12,23 +12,24 @@ class taleParser:
     def classifyPage(self,tale):
 
         length = len(tale)
-        page1Idx = int(length/4)
-        page2Idx = 7*int(length/12)
+        page1_end = 2 * length // 7
+        page2_end = 2 * length // 3
 
-        for i in range(page1Idx, length):
-            if tale[i] == ".":
-                page1Idx = i
-                break
+        def find_sentence_end(tale, start_idx):
+            in_dialogue = False
+            for idx in range(start_idx, len(tale)):
+                if tale[idx] == '"':
+                    in_dialogue = not in_dialogue
+                if tale[idx] == '.' and not in_dialogue:
+                    return idx + 1
+            return len(tale)
 
-        for i in range(page2Idx, length):
-            if tale[i] == '.':
-                page2Idx = i
-                break
+        page1_idx = find_sentence_end(tale, page1_end)
+        page2_idx = find_sentence_end(tale, page2_end)
 
-        page1 = tale[:page1Idx+1].strip()
-        page2 = tale[page1Idx+1:page2Idx+1].strip()
-        page3 = tale[page2Idx+1:].strip()
-
+        page1 = tale[:page1_idx].strip()
+        page2 = tale[page1_idx:page2_idx].strip()
+        page3 = tale[page2_idx:].strip()
 
         return [tale_moduel.Page(content=page1),tale_moduel.Page(content=page2),tale_moduel.Page(content=page3)]
 
